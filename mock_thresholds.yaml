@@ -1,0 +1,32 @@
+model_id: "IRB_47_ICR_US_OIL_GAS_2026_REVIEW"
+thresholds:
+  Total_Obligors:
+    condition: "greater_than"
+    green_limit: 50
+    amber_limit: 20
+    red_limit: 0
+  Stability_P_Value:
+    condition: "greater_than"
+    green_limit: 0.05
+    amber_limit: 0.01
+    red_limit: 0.00
+  AUC:
+    condition: "greater_than"
+    green_limit: 70.0
+    amber_limit: 60.0
+    red_limit: 50.0
+  Override_Rate:
+    condition: "less_than"
+    green_limit: 10.0
+    amber_limit: 20.0
+    red_limit: 30.0
+  Exact_Match_Rate:
+    condition: "greater_than"
+    green_limit: 80.0
+    amber_limit: 60.0
+    red_limit: 40.0
+  Prudence_Margin:
+    condition: "greater_than"
+    green_limit: 0.00
+    amber_limit: -0.50
+    red_limit: -1.00

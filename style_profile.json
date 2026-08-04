@@ -1,0 +1,76 @@
+{
+  "Opinion": {
+    "tone": "Highly formal, evaluative, conclusive, and objective. Use passive voice.",
+    "formatting_rules": ["Begin the first section with 'Overall Assessment:'. Begin the second section with 'Conclusion:'.", "Embed exact quantitative metric values directly in the prose."],
+    "relevant_metrics": ["Total_Obligors", "Current_Defaults", "Stability_P_Value", "AUC", "Prudence_Margin"]
+  },
+  "Context - Model history and regulatory context": {
+    "tone": "Highly formal, historical, and definitive. Use passive voice.",
+    "formatting_rules": ["Detail the governance framework, model identity, and data cut-off date.", "State the conclusions of the last annual review."],
+    "relevant_metrics": []
+  },
+  "Context - Materiality": {
+    "tone": "Objective, formal.",
+    "formatting_rules": ["Use bullet points to list the application perimeter and inclusion/exclusion criteria.", "Summarize the last annual review conclusions."],
+    "relevant_metrics": []
+  },
+  "Annual Review Scope": {
+    "tone": "Formal, declarative, and scoping-oriented. Objective and precise.",
+    "formatting_rules": ["Use bullet points to list scope items.", "Explicitly state the data cut-off dates and review focus."],
+    "relevant_metrics": []
+  },
+  "Glossary": {
+    "tone": "Objective, formal, and strictly definitional.",
+    "formatting_rules": ["Format as 'Acronym: Full Definition'.", "Define technical and regulatory acronyms."],
+    "relevant_metrics": []
+  },
+  "Executive Summary - WP1: General Portfolio Information": {
+    "tone": "Highly formal, objective, analytical.",
+    "formatting_rules": ["Explicitly define observation periods.", "Include total number of obligors and observed defaults."],
+    "relevant_metrics": ["Total_Obligors", "Backtesting_Obligors", "Current_Defaults", "Historical_Defaults"]
+  },
+  "Executive Summary - WP2: Stability Analysis": {
+    "tone": "Highly formal, objective, analytical.",
+    "formatting_rules": ["State rating distribution stability and p-values vs thresholds.", "Note any significant transitions."],
+    "relevant_metrics": ["Stability_P_Value", "Lower_Off_Diagonal_Transition", "Upper_Off_Diagonal_Transition"]
+  },
+  "Executive Summary - WP3: Performance Analysis": {
+    "tone": "Highly formal, objective, analytical.",
+    "formatting_rules": ["Detail AUC, concentration, and override tendencies.", "State the exact proportion of optimistic vs pessimistic bias."],
+    "relevant_metrics": ["AUC", "Override_Rate", "Optimistic_Bias", "Pessimistic_Bias", "Exact_Match_Rate"]
+  },
+  "Executive Summary - WP4: Predictive Power": {
+    "tone": "Highly formal, objective, analytical.",
+    "formatting_rules": ["Evaluate prudence at overall portfolio and rating grade levels.", "Compare Long-Run Average (LRA) to validated model PD."],
+    "relevant_metrics": ["LRA_Default_Rate", "Average_Validated_PD", "Prudence_Margin"]
+  },
+  "Executive Summary - WP5: Follow-up of recommendations": {
+    "tone": "Highly formal, objective, analytical.",
+    "formatting_rules": [
+      "CRITICAL: Output EACH recommendation as a separate bullet point starting with '- '.",
+      "CRITICAL: DO NOT write any introductory sentences. ONLY output the bullet points.",
+      "DO NOT invent recommendations. Use only the Business Context provided."
+    ],
+    "relevant_metrics": ["Open_Recommendations", "Closed_Recommendations"]
+  },
+  "Table of Recommendations - New Recommendations": {
+    "tone": "Direct, prescriptive, and objective.",
+    "formatting_rules": ["Write the text for the 'FINDING' and 'RECOMMENDATION' based on the breached KRI. Do not write a full paragraph, keep it concise for a table cell."],
+    "relevant_metrics": []
+  },
+  "Table of Recommendations - Follow-up of existing recommendations": {
+    "tone": "Evaluative, conclusive.",
+    "formatting_rules": ["Write the 'MRM OBSERVATIONS' summarizing the status update provided in the business context. Keep it concise for a table cell."],
+    "relevant_metrics": []
+  },
+  "Working Paper 1 - Results & Opinion": {
+    "tone": "Highly formal, objective, analytical.",
+    "formatting_rules": ["Detail the rationale for the given MRM opinion based on the general portfolio changes."],
+    "relevant_metrics": ["Total_Obligors", "Current_Defaults"]
+  },
+  "Working Paper 1 - Portfolio Metrics & Appendices": {
+    "tone": "Analytical, data-driven.",
+    "formatting_rules": ["Use bullet points to summarize the key shifts in portfolio size, EAD, and default observations as provided in the business context."],
+    "relevant_metrics": ["Total_Obligors", "Current_Defaults", "Historical_Defaults"]
+  }
+}

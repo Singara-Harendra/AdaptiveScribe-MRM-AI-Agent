@@ -1,0 +1,74 @@
+{
+  "model_id": "IRB_47_ICR_US_OIL_GAS_2026_REVIEW",
+  "review_period": "January 2025 to December 2026",
+  "results": {
+    "Total_Obligors": {
+      "metric_name": "Total Obligors",
+      "value": 0
+    },
+    "Backtesting_Obligors": {
+      "metric_name": "Backtesting Obligors",
+      "value": 0
+    },
+    "Current_Defaults": {
+      "metric_name": "Current Defaults",
+      "value": 0
+    },
+    "Historical_Defaults": {
+      "metric_name": "Historical Defaults",
+      "value": 0
+    },
+    "Stability_P_Value": {
+      "metric_name": "Stability P-Value",
+      "value": 0
+    },
+    "Lower_Off_Diagonal_Transition": {
+      "metric_name": "Lower Off-Diagonal Transition (%)",
+      "value": 20
+    },
+    "Upper_Off_Diagonal_Transition": {
+      "metric_name": "Upper Off-Diagonal Transition (%)",
+      "value": 18.2
+    },
+    "AUC": {
+      "metric_name": "Area Under Curve (AUC %)",
+      "value": 20
+    },
+    "Override_Rate": {
+      "metric_name": "Override Rate (%)",
+      "value": 35
+    },
+    "Optimistic_Bias": {
+      "metric_name": "Optimistic Bias (%)",
+      "value": 10.1
+    },
+    "Pessimistic_Bias": {
+      "metric_name": "Pessimistic Bias (%)",
+      "value": 5.1
+    },
+    "Exact_Match_Rate": {
+      "metric_name": "Exact Match Rate (%)",
+      "value": 60.0
+    },
+    "LRA_Default_Rate": {
+      "metric_name": "Long-Run Average Default Rate (%)",
+      "value": 4.10
+    },
+    "Average_Validated_PD": {
+      "metric_name": "Average Validated PD (%)",
+      "value": 4.50
+    },
+    "Prudence_Margin": {
+      "metric_name": "Prudence Margin (PD minus LRA)",
+      "value": 0.40
+    },
+    "Open_Recommendations": {
+      "metric_name": "Open Recommendations",
+      "value": 4
+    },
+    "Closed_Recommendations": {
+      "metric_name": "Closed Recommendations",
+      "value": 2
+    }
+  }
+}

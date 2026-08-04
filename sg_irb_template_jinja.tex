@@ -1,0 +1,338 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage[a4paper, top=3.5cm, bottom=2.5cm, left=2cm, right=2cm, headheight=2.5cm]{geometry}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{makecell}
+\usepackage{titlesec}
+\usepackage{amssymb} 
+\usepackage{graphicx}
+\usepackage{pdflscape} % Added for landscape orientation of 10-column tables
+
+% Define SG Corporate Colors
+\definecolor{sgred}{RGB}{192, 0, 0}
+\definecolor{sggray}{RGB}{245, 245, 245}
+
+% Define standard column for vertical centering, strictly left-aligned text for paragraphs
+\renewcommand{\tabularxcolumn}[1]{m{#1}}
+
+% SG Corporate Header
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\chead{
+    \renewcommand{\arraystretch}{1.5}
+    \noindent\begin{tabularx}{\textwidth}{|X|c|X|}
+    \hline
+    \makecell[c]{\includegraphics[width=3cm]{sg_logo.png}} & 
+    \makecell[c]{RISQ/MRM Model Review \\ \hline \textbf{ANNUAL REVIEW REPORT} \\ \textbf{ICR US OIL \& GAS PD MODEL} \\ \textbf{(LOCAL ID: 665 -- CENTRAL ID: IRB\_47)}} & 
+    \makecell[c]{Confidentiality: C2 \\ \hline Version: \textbf{FINAL}} \\
+    \hline
+    \end{tabularx}
+}
+\rfoot{\thepage}
+
+% Dynamic Section Numbering (Size reduced to 10pt using \normalsize)
+\titleformat{\section}{\normalsize\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection.}{0.5em}{}
+
+% Custom Bullet Logic (Main = Red Square, Sub = Black Square, Reduced Size)
+\renewcommand{\labelitemi}{\textcolor{sgred}{\scriptsize $\blacksquare$}}
+\renewcommand{\labelitemii}{\scriptsize $\blacksquare$}
+
+\begin{document}
+
+% ---------------- OPINION ----------------
+<BLOCK> if secOpinion </BLOCK>
+\section{Opinion}
+\vspace{0.3cm}
+\noindent\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+\hline
+\rowcolor{sgred}
+\multicolumn{4}{|l|}{\textcolor{white}{\textbf{MRM Opinion}}} \\
+\hline
+\centering\small "No or minor deficiencies: Adequate" & \centering\small "Major deficiencies with mitigant: Acceptable" & \centering\small "Major deficiencies: need improvement" & \centering\arraybackslash\small "Severe deficiencies: Rejected" \\
+\hline
+\makecell[c]{<VAR>opAdequate</VAR>} & \makecell[c]{<VAR>opAcceptable</VAR>} & \makecell[c]{<VAR>opImprovement</VAR>} & \makecell[c]{<VAR>opRejected</VAR>} \\
+\hline
+\end{tabularx}
+\vspace{0.3cm}
+\noindent\begin{tabularx}{\textwidth}{|X|}
+\hline
+<VAR>secOpinion</VAR> \\
+\hline
+\end{tabularx}
+<BLOCK> endif </BLOCK>
+
+% ---------------- CONTEXT ----------------
+<BLOCK> if secContextHistory or secContextMateriality </BLOCK>
+\section{Context}
+<BLOCK> if secContextHistory </BLOCK>
+\subsection{\underline{Model history and regulatory context}}
+<VAR>secContextHistory</VAR>
+<BLOCK> endif </BLOCK>
+<BLOCK> if secContextMateriality </BLOCK>
+\subsection{\underline{Materiality}}
+\vspace{0.3cm}
+\noindent\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{4.5cm}|X|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Model Card Details}} \\
+\hline
+\centering\textbf{Application perimeter} & <VAR>secContextMateriality</VAR> \\
+\hline
+\end{tabularx}
+<BLOCK> endif </BLOCK>
+<BLOCK> endif </BLOCK>
+
+% ---------------- SCOPE ----------------
+<BLOCK> if secScope </BLOCK>
+\section{Annual Review Scope}
+<VAR>secScope</VAR>
+<BLOCK> endif </BLOCK>
+
+% ---------------- GLOSSARY ----------------
+<BLOCK> if secGlossary </BLOCK>
+\section{Glossary}
+\noindent\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{4cm}|X|}
+\hline
+\rowcolor{sggray}
+\centering\textbf{Acronym} & \centering\arraybackslash\textbf{Definition} \\
+\hline
+<VAR>secGlossary</VAR>
+\hline
+\end{tabularx}
+<BLOCK> endif </BLOCK>
+
+% ---------------- EXECUTIVE SUMMARY ----------------
+<BLOCK> if wp1_rows or wp2_rows or wp3_rows or wp4_rows or wp5_rows </BLOCK>
+\section{Executive Summary}
+<BLOCK> if wp1_rows </BLOCK>
+\subsection{WP1: General Portfolio Information}
+\noindent\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|X|}
+\hline
+\rowcolor{sgred}
+\centering\textcolor{white}{\textbf{Theme}} & \centering\textcolor{white}{\textbf{MRM opinion}} & \centering\arraybackslash\textcolor{white}{\textbf{Detail}} \\
+\hline
+<BLOCK> for row in wp1_rows </BLOCK>
+<VAR>row.theme</VAR> & <VAR>row.opinion</VAR> & <VAR>row.detail</VAR> \\
+\hline
+<BLOCK> endfor </BLOCK>
+\end{tabularx}
+\vspace{0.5cm}
+<BLOCK> endif </BLOCK>
+
+<BLOCK> if wp2_rows </BLOCK>
+\subsection{WP2: Stability Analysis}
+\noindent\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|X|}
+\hline
+\rowcolor{sgred}
+\centering\textcolor{white}{\textbf{Theme}} & \centering\textcolor{white}{\textbf{MRM opinion}} & \centering\arraybackslash\textcolor{white}{\textbf{Detail}} \\
+\hline
+<BLOCK> for row in wp2_rows </BLOCK>
+<VAR>row.theme</VAR> & <VAR>row.opinion</VAR> & <VAR>row.detail</VAR> \\
+\hline
+<BLOCK> endfor </BLOCK>
+\end{tabularx}
+\vspace{0.5cm}
+<BLOCK> endif </BLOCK>
+
+<BLOCK> if wp3_rows </BLOCK>
+\subsection{WP3: Performance Analysis}
+\noindent\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|X|}
+\hline
+\rowcolor{sgred}
+\centering\textcolor{white}{\textbf{Theme}} & \centering\textcolor{white}{\textbf{MRM opinion}} & \centering\arraybackslash\textcolor{white}{\textbf{Detail}} \\
+\hline
+<BLOCK> for row in wp3_rows </BLOCK>
+<VAR>row.theme</VAR> & <VAR>row.opinion</VAR> & <VAR>row.detail</VAR> \\
+\hline
+<BLOCK> endfor </BLOCK>
+\end{tabularx}
+\vspace{0.5cm}
+<BLOCK> endif </BLOCK>
+
+<BLOCK> if wp4_rows </BLOCK>
+\subsection{WP4: Predictive Power}
+\noindent\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|X|}
+\hline
+\rowcolor{sgred}
+\centering\textcolor{white}{\textbf{Theme}} & \centering\textcolor{white}{\textbf{MRM opinion}} & \centering\arraybackslash\textcolor{white}{\textbf{Detail}} \\
+\hline
+<BLOCK> for row in wp4_rows </BLOCK>
+<VAR>row.theme</VAR> & <VAR>row.opinion</VAR> & <VAR>row.detail</VAR> \\
+\hline
+<BLOCK> endfor </BLOCK>
+\end{tabularx}
+\vspace{0.5cm}
+<BLOCK> endif </BLOCK>
+
+<BLOCK> if wp5_rows </BLOCK>
+\subsection{WP5: Follow-up of recommendations}
+\noindent\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|X|}
+\hline
+\rowcolor{sgred}
+\centering\textcolor{white}{\textbf{Theme}} & \centering\textcolor{white}{\textbf{MRM opinion}} & \centering\arraybackslash\textcolor{white}{\textbf{Detail}} \\
+\hline
+<BLOCK> for row in wp5_rows </BLOCK>
+<VAR>row.theme</VAR> & <VAR>row.opinion</VAR> & <VAR>row.detail</VAR> \\
+\hline
+<BLOCK> endfor </BLOCK>
+\end{tabularx}
+<BLOCK> endif </BLOCK>
+<BLOCK> endif </BLOCK>
+
+
+% ---------------- RECOMMENDATIONS (LANDSCAPE) ----------------
+<BLOCK> if rec_new or rec_ext </BLOCK>
+\begin{landscape}
+\section{Table of Recommendations}
+
+<BLOCK> if rec_new </BLOCK>
+\subsection{New Recommendations}
+\begingroup
+\tiny
+\renewcommand{\arraystretch}{1.5}
+\noindent\begin{tabularx}{\linewidth}{|p{1.2cm}|p{2cm}|p{1.5cm}|X|X|p{1.8cm}|p{1.5cm}|p{1.2cm}|p{1.2cm}|X|}
+\hline
+\rowcolor{sgred}
+\textcolor{white}{\textbf{NFA ID}} & \textcolor{white}{\textbf{REC NO.}} & \textcolor{white}{\textbf{THEME}} & \textcolor{white}{\textbf{FINDING}} & \textcolor{white}{\textbf{RECOMMENDATION}} & \textcolor{white}{\textbf{ADDRESSED TO}} & \textcolor{white}{\textbf{CRITICALITY}} & \textcolor{white}{\textbf{DUE DATE}} & \textcolor{white}{\textbf{STATUS}} & \textcolor{white}{\textbf{MRM OBSERVATIONS}} \\
+\hline
+<BLOCK> for row in rec_new </BLOCK>
+<VAR>row['NFA ID']</VAR> & <VAR>row['REC NO.']</VAR> & <VAR>row['THEME']</VAR> & <VAR>row['FINDING']</VAR> & <VAR>row['RECOMMENDATION']</VAR> & <VAR>row['ADDRESSED TO']</VAR> & <VAR>row['CRITICALITY']</VAR> & <VAR>row['DUE DATE']</VAR> & <VAR>row['STATUS']</VAR> & <VAR>row['MRM OBSERVATIONS']</VAR> \\
+\hline
+<BLOCK> endfor </BLOCK>
+\end{tabularx}
+\endgroup
+<BLOCK> else </BLOCK>
+\subsection{New Recommendations}
+There are no new recommendations specific to ICR US Oil and Gas PD model based on the current review.
+<BLOCK> endif </BLOCK>
+
+<BLOCK> if rec_ext </BLOCK>
+\subsection{Follow-up of existing recommendations}
+\begingroup
+\tiny
+\renewcommand{\arraystretch}{1.5}
+\noindent\begin{tabularx}{\linewidth}{|p{1.2cm}|p{2cm}|p{1.5cm}|X|X|p{1.8cm}|p{1.5cm}|p{1.2cm}|p{1.2cm}|X|}
+\hline
+\rowcolor{sgred}
+\textcolor{white}{\textbf{NFA ID}} & \textcolor{white}{\textbf{REC NO.}} & \textcolor{white}{\textbf{THEME}} & \textcolor{white}{\textbf{FINDING}} & \textcolor{white}{\textbf{RECOMMENDATION}} & \textcolor{white}{\textbf{ADDRESSED TO}} & \textcolor{white}{\textbf{CRITICALITY}} & \textcolor{white}{\textbf{DUE DATE}} & \textcolor{white}{\textbf{STATUS}} & \textcolor{white}{\textbf{MRM OBSERVATIONS}} \\
+\hline
+<BLOCK> for row in rec_ext </BLOCK>
+<VAR>row['NFA ID']</VAR> & <VAR>row['REC NO.']</VAR> & <VAR>row['THEME']</VAR> & <VAR>row['FINDING']</VAR> & <VAR>row['RECOMMENDATION']</VAR> & <VAR>row['ADDRESSED TO']</VAR> & <VAR>row['CRITICALITY']</VAR> & <VAR>row['DUE DATE']</VAR> & <VAR>row['STATUS']</VAR> & <VAR>row['MRM OBSERVATIONS']</VAR> \\
+\hline
+<BLOCK> endfor </BLOCK>
+\end{tabularx}
+\endgroup
+<BLOCK> endif </BLOCK>
+
+\end{landscape}
+<BLOCK> endif </BLOCK>
+
+
+% ---------------- WORKING PAPER 1 ----------------
+<BLOCK> if wp1_meta or wp1_res_det or wp1_t8 </BLOCK>
+\section{Working Paper 1 -- GENERAL PORTFOLIO INFORMATION}
+
+<BLOCK> if wp1_meta </BLOCK>
+\noindent\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{3cm}|X|>{\centering\arraybackslash}p{4cm}|}
+\hline
+\rowcolor{sggray}
+\textbf{Owner} & <VAR>wp1_meta.owner</VAR> & <VAR>wp1_meta.owner_dept</VAR> \\
+\hline
+\textbf{Review} & <VAR>wp1_meta.review1</VAR> \newline <VAR>wp1_meta.review2</VAR> & <VAR>wp1_meta.review1_dept</VAR> \newline <VAR>wp1_meta.review2_dept</VAR> \\
+\hline
+\textbf{Objective} & \multicolumn{2}{p{11.5cm}|}{<VAR>wp1_meta.objective</VAR>} \\
+\hline
+\end{tabularx}
+
+\vspace{0.5cm}
+\noindent\textbf{PURPOSE OF THE ANALYSIS AND METHODOLOGY CARRIED OUT}
+\begin{itemize}
+\item \textbf{Background and rationale for the analysis}
+\end{itemize}
+According to the article 78 of the ECB guide to internal models which describes the content of the annual review, the following applies: \newline
+\textit{(a) The validation process should assess the performance of the rating systems by means of qualitative and quantitative methods, in particular with regard to the ranking of borrowers by creditworthiness and risk parameter estimation.}
+
+\begin{itemize}
+\item \textbf{Objectives of the analysis}
+\end{itemize}
+This working paper is devoted to providing an overall view of the ROE portfolio in terms of EAD, RWA, and defaults analyses.
+
+\begin{itemize}
+\item \textbf{Review procedure}
+\end{itemize}
+The procedure followed in this review consisted in analyzing the results provided by the model performance platform.
+
+\begin{itemize}
+\item \textbf{Key contacts}
+\end{itemize}
+<VAR>wp1_meta.contacts</VAR>
+<BLOCK> endif </BLOCK>
+
+
+<BLOCK> if wp1_res_det </BLOCK>
+\vspace{0.5cm}
+\noindent\textbf{RESULTS}
+
+\vspace{0.3cm}
+\noindent\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|X|}
+\hline
+\rowcolor{sgred}
+\centering\textcolor{white}{\textbf{Th\`{e}me}} & \centering\textcolor{white}{\textbf{MRM opinion}} & \centering\arraybackslash\textcolor{white}{\textbf{Detail}} \\
+\hline
+General Portfolio Information & <VAR>wp1_res_op</VAR> & <VAR>wp1_res_det</VAR> \\
+\hline
+\end{tabularx}
+<BLOCK> endif </BLOCK>
+
+
+<BLOCK> if wp1_t8 </BLOCK>
+\vspace{0.5cm}
+\noindent\textbf{A) Portfolio key figures}
+
+<VAR>wp1_txt_kf</VAR>
+
+\vspace{0.3cm}
+\noindent\begin{tabularx}{\textwidth}{|X|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|}
+\hline
+\rowcolor{sgred}
+\centering\textcolor{white}{\textbf{PERIOD}} & \textcolor{white}{\textbf{RWEA}} & \textcolor{white}{\textbf{EAD}} & \textcolor{white}{\textbf{NO. OF CUSTOMERS}} & \textcolor{white}{\textbf{NO. OF RATING GRADES}} \\
+\hline
+<BLOCK> for row in wp1_t8 </BLOCK>
+<VAR>row.PERIOD</VAR> & <VAR>row.RWEA</VAR> & <VAR>row.EAD</VAR> & <VAR>row.CUSTOMERS</VAR> & <VAR>row.GRADES</VAR> \\
+\hline
+<BLOCK> endfor </BLOCK>
+\end{tabularx}
+
+\vspace{0.5cm}
+\noindent\textbf{B) Default analysis}
+
+<VAR>wp1_txt_def</VAR>
+
+\vspace{0.5cm}
+\noindent\textbf{APPENDICES}
+
+\noindent\underline{Rationale for decrease in portfolio size}
+
+<VAR>wp1_txt_app</VAR>
+
+\vspace{0.3cm}
+\noindent\begin{tabularx}{\textwidth}{|X|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{3cm}|}
+\hline
+\rowcolor{sgred}
+\centering\textcolor{white}{\textbf{Reason}} & \textcolor{white}{\textbf{\# obligors}} & \textcolor{white}{\textbf{\% of obligors}} \\
+\hline
+<BLOCK> for row in wp1_t11 </BLOCK>
+<VAR>row.Reason</VAR> & <VAR>row.Obligors</VAR> & <VAR>row.Percent</VAR> \\
+\hline
+<BLOCK> endfor </BLOCK>
+\end{tabularx}
+<BLOCK> endif </BLOCK>
+
+<BLOCK> endif </BLOCK>
+
+\end{document}
