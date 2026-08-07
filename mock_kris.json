@@ -4,23 +4,23 @@
   "results": {
     "Total_Obligors": {
       "metric_name": "Total Obligors",
-      "value": 0
+      "value": 20
     },
     "Backtesting_Obligors": {
       "metric_name": "Backtesting Obligors",
-      "value": 0
+      "value": 12
     },
     "Current_Defaults": {
       "metric_name": "Current Defaults",
-      "value": 0
+      "value": 4
     },
     "Historical_Defaults": {
       "metric_name": "Historical Defaults",
-      "value": 0
+      "value": 2
     },
     "Stability_P_Value": {
       "metric_name": "Stability P-Value",
-      "value": 0
+      "value": 0.02
     },
     "Lower_Off_Diagonal_Transition": {
       "metric_name": "Lower Off-Diagonal Transition (%)",

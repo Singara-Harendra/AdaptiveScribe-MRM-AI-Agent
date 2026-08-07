@@ -2,6 +2,8 @@ MRM Review report automation.zip
 MRM Review report automation/
 __pycache__/
 artifacts/
-backup but printing everything in every section/
+backup without self learning/
 mrm_env/
 output/
+runtime_inputs/
+backups/

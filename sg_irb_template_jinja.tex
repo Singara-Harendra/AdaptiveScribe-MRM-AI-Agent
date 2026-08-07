@@ -10,14 +10,19 @@
 \usepackage{titlesec}
 \usepackage{amssymb} 
 \usepackage{graphicx}
-\usepackage{pdflscape} % Added for landscape orientation of 10-column tables
+\usepackage{pdflscape}
+\usepackage{longtable} % Added for multi-page 10-column tables
 
 % Define SG Corporate Colors
 \definecolor{sgred}{RGB}{192, 0, 0}
 \definecolor{sggray}{RGB}{245, 245, 245}
 
-% Define standard column for vertical centering, strictly left-aligned text for paragraphs
+% Define standard column for vertical centering
 \renewcommand{\tabularxcolumn}[1]{m{#1}}
+
+% Global Table Counter
+\newcounter{tableCounter}
+\setcounter{tableCounter}{0}
 
 % SG Corporate Header
 \pagestyle{fancy}
@@ -35,13 +40,13 @@
 }
 \rfoot{\thepage}
 
-% Dynamic Section Numbering (Size reduced to 10pt using \normalsize)
+% Dynamic Section Numbering
 \titleformat{\section}{\normalsize\bfseries}{\thesection.}{0.5em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection.}{0.5em}{}
 
-% Custom Bullet Logic (Main = Red Square, Sub = Black Square, Reduced Size)
-\renewcommand{\labelitemi}{\textcolor{sgred}{\scriptsize $\blacksquare$}}
-\renewcommand{\labelitemii}{\scriptsize $\blacksquare$}
+% Custom Half-Size Bullet Logic
+\renewcommand{\labelitemi}{\textcolor{sgred}{\scalebox{0.5}{$\blacksquare$}}}
+\renewcommand{\labelitemii}{\scalebox{0.5}{$\blacksquare$}}
 
 \begin{document}
 
@@ -111,6 +116,7 @@
 \section{Executive Summary}
 <BLOCK> if wp1_rows </BLOCK>
 \subsection{WP1: General Portfolio Information}
+\stepcounter{tableCounter}
 \noindent\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|X|}
 \hline
 \rowcolor{sgred}
@@ -121,11 +127,16 @@
 \hline
 <BLOCK> endfor </BLOCK>
 \end{tabularx}
-\vspace{0.5cm}
+\begin{center}
+\scriptsize \textbf{Table \thetableCounter: MRM opinion for WP1} \\
+Source: RISQ/MRM
+\end{center}
+\vspace{0.3cm}
 <BLOCK> endif </BLOCK>
 
 <BLOCK> if wp2_rows </BLOCK>
 \subsection{WP2: Stability Analysis}
+\stepcounter{tableCounter}
 \noindent\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|X|}
 \hline
 \rowcolor{sgred}
@@ -136,11 +147,16 @@
 \hline
 <BLOCK> endfor </BLOCK>
 \end{tabularx}
-\vspace{0.5cm}
+\begin{center}
+\scriptsize \textbf{Table \thetableCounter: MRM opinion for WP2} \\
+Source: RISQ/MRM
+\end{center}
+\vspace{0.3cm}
 <BLOCK> endif </BLOCK>
 
 <BLOCK> if wp3_rows </BLOCK>
 \subsection{WP3: Performance Analysis}
+\stepcounter{tableCounter}
 \noindent\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|X|}
 \hline
 \rowcolor{sgred}
@@ -151,11 +167,16 @@
 \hline
 <BLOCK> endfor </BLOCK>
 \end{tabularx}
-\vspace{0.5cm}
+\begin{center}
+\scriptsize \textbf{Table \thetableCounter: MRM opinion for WP3} \\
+Source: RISQ/MRM
+\end{center}
+\vspace{0.3cm}
 <BLOCK> endif </BLOCK>
 
 <BLOCK> if wp4_rows </BLOCK>
 \subsection{WP4: Predictive Power}
+\stepcounter{tableCounter}
 \noindent\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|X|}
 \hline
 \rowcolor{sgred}
@@ -166,11 +187,16 @@
 \hline
 <BLOCK> endfor </BLOCK>
 \end{tabularx}
-\vspace{0.5cm}
+\begin{center}
+\scriptsize \textbf{Table \thetableCounter: MRM opinion for WP4} \\
+Source: RISQ/MRM
+\end{center}
+\vspace{0.3cm}
 <BLOCK> endif </BLOCK>
 
 <BLOCK> if wp5_rows </BLOCK>
 \subsection{WP5: Follow-up of recommendations}
+\stepcounter{tableCounter}
 \noindent\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|X|}
 \hline
 \rowcolor{sgred}
@@ -181,13 +207,30 @@
 \hline
 <BLOCK> endfor </BLOCK>
 \end{tabularx}
+\begin{center}
+\scriptsize \textbf{Table \thetableCounter: MRM opinion for WP5} \\
+Source: RISQ/MRM
+\end{center}
 <BLOCK> endif </BLOCK>
 <BLOCK> endif </BLOCK>
 
 
-% ---------------- RECOMMENDATIONS (LANDSCAPE) ----------------
+% ---------------- RECOMMENDATIONS (LANDSCAPE WITH MANUAL HEADER) ----------------
 <BLOCK> if rec_new or rec_ext </BLOCK>
 \begin{landscape}
+\thispagestyle{empty} % Clear standard header for landscape pages
+
+% Manually Draw Header
+\renewcommand{\arraystretch}{1.5}
+\noindent\begin{tabularx}{\linewidth}{|X|c|X|}
+\hline
+\makecell[c]{\includegraphics[width=3cm]{sg_logo.png}} & 
+\makecell[c]{RISQ/MRM Model Review \\ \hline \textbf{ANNUAL REVIEW REPORT} \\ \textbf{ICR US OIL \& GAS PD MODEL} \\ \textbf{(LOCAL ID: 665 -- CENTRAL ID: IRB\_47)}} & 
+\makecell[c]{Confidentiality: C2 \\ \hline Version: \textbf{FINAL}} \\
+\hline
+\end{tabularx}
+\vspace{0.5cm}
+
 \section{Table of Recommendations}
 
 <BLOCK> if rec_new </BLOCK>
@@ -195,16 +238,22 @@
 \begingroup
 \tiny
 \renewcommand{\arraystretch}{1.5}
-\noindent\begin{tabularx}{\linewidth}{|p{1.2cm}|p{2cm}|p{1.5cm}|X|X|p{1.8cm}|p{1.5cm}|p{1.2cm}|p{1.2cm}|X|}
+\begin{longtable}{|p{1cm}|p{1.5cm}|p{1.2cm}|p{4cm}|p{4cm}|p{1.5cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{4cm}|}
 \hline
 \rowcolor{sgred}
 \textcolor{white}{\textbf{NFA ID}} & \textcolor{white}{\textbf{REC NO.}} & \textcolor{white}{\textbf{THEME}} & \textcolor{white}{\textbf{FINDING}} & \textcolor{white}{\textbf{RECOMMENDATION}} & \textcolor{white}{\textbf{ADDRESSED TO}} & \textcolor{white}{\textbf{CRITICALITY}} & \textcolor{white}{\textbf{DUE DATE}} & \textcolor{white}{\textbf{STATUS}} & \textcolor{white}{\textbf{MRM OBSERVATIONS}} \\
 \hline
+\endfirsthead
+\hline
+\rowcolor{sgred}
+\textcolor{white}{\textbf{NFA ID}} & \textcolor{white}{\textbf{REC NO.}} & \textcolor{white}{\textbf{THEME}} & \textcolor{white}{\textbf{FINDING}} & \textcolor{white}{\textbf{RECOMMENDATION}} & \textcolor{white}{\textbf{ADDRESSED TO}} & \textcolor{white}{\textbf{CRITICALITY}} & \textcolor{white}{\textbf{DUE DATE}} & \textcolor{white}{\textbf{STATUS}} & \textcolor{white}{\textbf{MRM OBSERVATIONS}} \\
+\hline
+\endhead
 <BLOCK> for row in rec_new </BLOCK>
 <VAR>row['NFA ID']</VAR> & <VAR>row['REC NO.']</VAR> & <VAR>row['THEME']</VAR> & <VAR>row['FINDING']</VAR> & <VAR>row['RECOMMENDATION']</VAR> & <VAR>row['ADDRESSED TO']</VAR> & <VAR>row['CRITICALITY']</VAR> & <VAR>row['DUE DATE']</VAR> & <VAR>row['STATUS']</VAR> & <VAR>row['MRM OBSERVATIONS']</VAR> \\
 \hline
 <BLOCK> endfor </BLOCK>
-\end{tabularx}
+\end{longtable}
 \endgroup
 <BLOCK> else </BLOCK>
 \subsection{New Recommendations}
@@ -216,18 +265,30 @@ There are no new recommendations specific to ICR US Oil and Gas PD model based o
 \begingroup
 \tiny
 \renewcommand{\arraystretch}{1.5}
-\noindent\begin{tabularx}{\linewidth}{|p{1.2cm}|p{2cm}|p{1.5cm}|X|X|p{1.8cm}|p{1.5cm}|p{1.2cm}|p{1.2cm}|X|}
+\begin{longtable}{|p{1cm}|p{1.5cm}|p{1.2cm}|p{4cm}|p{4cm}|p{1.5cm}|p{1.2cm}|p{1.2cm}|p{1.2cm}|p{4cm}|}
 \hline
 \rowcolor{sgred}
 \textcolor{white}{\textbf{NFA ID}} & \textcolor{white}{\textbf{REC NO.}} & \textcolor{white}{\textbf{THEME}} & \textcolor{white}{\textbf{FINDING}} & \textcolor{white}{\textbf{RECOMMENDATION}} & \textcolor{white}{\textbf{ADDRESSED TO}} & \textcolor{white}{\textbf{CRITICALITY}} & \textcolor{white}{\textbf{DUE DATE}} & \textcolor{white}{\textbf{STATUS}} & \textcolor{white}{\textbf{MRM OBSERVATIONS}} \\
 \hline
+\endfirsthead
+\hline
+\rowcolor{sgred}
+\textcolor{white}{\textbf{NFA ID}} & \textcolor{white}{\textbf{REC NO.}} & \textcolor{white}{\textbf{THEME}} & \textcolor{white}{\textbf{FINDING}} & \textcolor{white}{\textbf{RECOMMENDATION}} & \textcolor{white}{\textbf{ADDRESSED TO}} & \textcolor{white}{\textbf{CRITICALITY}} & \textcolor{white}{\textbf{DUE DATE}} & \textcolor{white}{\textbf{STATUS}} & \textcolor{white}{\textbf{MRM OBSERVATIONS}} \\
+\hline
+\endhead
 <BLOCK> for row in rec_ext </BLOCK>
 <VAR>row['NFA ID']</VAR> & <VAR>row['REC NO.']</VAR> & <VAR>row['THEME']</VAR> & <VAR>row['FINDING']</VAR> & <VAR>row['RECOMMENDATION']</VAR> & <VAR>row['ADDRESSED TO']</VAR> & <VAR>row['CRITICALITY']</VAR> & <VAR>row['DUE DATE']</VAR> & <VAR>row['STATUS']</VAR> & <VAR>row['MRM OBSERVATIONS']</VAR> \\
 \hline
 <BLOCK> endfor </BLOCK>
-\end{tabularx}
+\end{longtable}
 \endgroup
 <BLOCK> endif </BLOCK>
+
+\stepcounter{tableCounter}
+\begin{center}
+\scriptsize \textbf{Table \thetableCounter: Table of recommendations} \\
+Source: RISQ/MRM
+\end{center}
 
 \end{landscape}
 <BLOCK> endif </BLOCK>
@@ -253,31 +314,24 @@ There are no new recommendations specific to ICR US Oil and Gas PD model based o
 \noindent\textbf{PURPOSE OF THE ANALYSIS AND METHODOLOGY CARRIED OUT}
 \begin{itemize}
 \item \textbf{Background and rationale for the analysis}
-\end{itemize}
-According to the article 78 of the ECB guide to internal models which describes the content of the annual review, the following applies: \newline
-\textit{(a) The validation process should assess the performance of the rating systems by means of qualitative and quantitative methods, in particular with regard to the ranking of borrowers by creditworthiness and risk parameter estimation.}
+\newline <VAR>wp1_meta.background</VAR>
 
-\begin{itemize}
 \item \textbf{Objectives of the analysis}
-\end{itemize}
-This working paper is devoted to providing an overall view of the ROE portfolio in terms of EAD, RWA, and defaults analyses.
+\newline <VAR>wp1_meta.objectives_text</VAR>
 
-\begin{itemize}
 \item \textbf{Review procedure}
-\end{itemize}
-The procedure followed in this review consisted in analyzing the results provided by the model performance platform.
+\newline <VAR>wp1_meta.review_proc</VAR>
 
-\begin{itemize}
 \item \textbf{Key contacts}
 \end{itemize}
 <VAR>wp1_meta.contacts</VAR>
 <BLOCK> endif </BLOCK>
 
-
 <BLOCK> if wp1_res_det </BLOCK>
 \vspace{0.5cm}
 \noindent\textbf{RESULTS}
 
+\stepcounter{tableCounter}
 \vspace{0.3cm}
 \noindent\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|X|}
 \hline
@@ -287,8 +341,11 @@ The procedure followed in this review consisted in analyzing the results provide
 General Portfolio Information & <VAR>wp1_res_op</VAR> & <VAR>wp1_res_det</VAR> \\
 \hline
 \end{tabularx}
+\begin{center}
+\scriptsize \textbf{Table \thetableCounter: MRM opinion for General Portfolio Information} \\
+Source: RISQ/MRM
+\end{center}
 <BLOCK> endif </BLOCK>
-
 
 <BLOCK> if wp1_t8 </BLOCK>
 \vspace{0.5cm}
@@ -296,17 +353,58 @@ General Portfolio Information & <VAR>wp1_res_op</VAR> & <VAR>wp1_res_det</VAR> \
 
 <VAR>wp1_txt_kf</VAR>
 
+\stepcounter{tableCounter}
 \vspace{0.3cm}
 \noindent\begin{tabularx}{\textwidth}{|X|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|}
 \hline
 \rowcolor{sgred}
-\centering\textcolor{white}{\textbf{PERIOD}} & \textcolor{white}{\textbf{RWEA}} & \textcolor{white}{\textbf{EAD}} & \textcolor{white}{\textbf{NO. OF CUSTOMERS}} & \textcolor{white}{\textbf{NO. OF RATING GRADES}} \\
+\centering\textcolor{white}{\textbf{PERIOD}} & \centering\textcolor{white}{\textbf{RWEA}} & \centering\textcolor{white}{\textbf{EAD}} & \centering\textcolor{white}{\textbf{NO. OF CUSTOMERS}} & \centering\arraybackslash\textcolor{white}{\textbf{NO. OF RATING GRADES}} \\
 \hline
 <BLOCK> for row in wp1_t8 </BLOCK>
-<VAR>row.PERIOD</VAR> & <VAR>row.RWEA</VAR> & <VAR>row.EAD</VAR> & <VAR>row.CUSTOMERS</VAR> & <VAR>row.GRADES</VAR> \\
+<VAR>row.PERIOD</VAR> & \centering<VAR>row.RWEA</VAR> & \centering<VAR>row.EAD</VAR> & \centering<VAR>row.CUSTOMERS</VAR> & \centering\arraybackslash<VAR>row.GRADES</VAR> \\
 \hline
 <BLOCK> endfor </BLOCK>
 \end{tabularx}
+\begin{center}
+\scriptsize \textbf{Table \thetableCounter: Application portfolio summary} \\
+Source: RISQ/MRM from MADORI
+\end{center}
+
+\stepcounter{tableCounter}
+\vspace{0.3cm}
+\noindent\begin{tabularx}{\textwidth}{|X|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|}
+\hline
+\rowcolor{sgred}
+\centering\textcolor{white}{\textbf{PERIOD}} & \centering\textcolor{white}{\textbf{RWEA}} & \centering\textcolor{white}{\textbf{EAD}} & \centering\textcolor{white}{\textbf{NO. OF CUSTOMERS}} & \centering\arraybackslash\textcolor{white}{\textbf{NO. OF RATING GRADES}} \\
+\hline
+<BLOCK> for row in wp1_t9 </BLOCK>
+<VAR>row.PERIOD</VAR> & \centering<VAR>row.RWEA</VAR> & \centering<VAR>row.EAD</VAR> & \centering<VAR>row.CUSTOMERS</VAR> & \centering\arraybackslash<VAR>row.GRADES</VAR> \\
+\hline
+<BLOCK> endfor </BLOCK>
+\end{tabularx}
+\begin{center}
+\scriptsize \textbf{Table \thetableCounter: Performance data (LRA) summary} \\
+Source: RISQ/MRM from MADORI
+\end{center}
+
+\stepcounter{tableCounter}
+\vspace{0.3cm}
+\noindent\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}p{1.2cm}|>{\centering\arraybackslash}p{1.2cm}|>{\centering\arraybackslash}p{1.2cm}|>{\centering\arraybackslash}p{1.2cm}|>{\centering\arraybackslash}p{1.2cm}|>{\centering\arraybackslash}p{1.2cm}|>{\centering\arraybackslash}p{1.2cm}|>{\centering\arraybackslash}p{1.2cm}|}
+\hline
+\rowcolor{sgred}
+\textcolor{white}{\textbf{Cohort}} & \multicolumn{2}{c|}{\textcolor{white}{\textbf{CORI}}} & \multicolumn{2}{c|}{\textcolor{white}{\textbf{GLBA}}} & \multicolumn{2}{c|}{\textcolor{white}{\textbf{GLFI}}} & \multicolumn{2}{c|}{\textcolor{white}{\textbf{Portfolio}}} \\
+\rowcolor{sgred}
+& \textcolor{white}{\textbf{In-bonis}} & \textcolor{white}{\textbf{Default}} & \textcolor{white}{\textbf{In-bonis}} & \textcolor{white}{\textbf{Default}} & \textcolor{white}{\textbf{In-bonis}} & \textcolor{white}{\textbf{Default}} & \textcolor{white}{\textbf{In-bonis}} & \textcolor{white}{\textbf{Default}} \\
+\hline
+<BLOCK> for row in wp1_t10 </BLOCK>
+<VAR>row.Cohort</VAR> & <VAR>row.CORI_IB</VAR> & <VAR>row.CORI_Def</VAR> & <VAR>row.GLBA_IB</VAR> & <VAR>row.GLBA_Def</VAR> & <VAR>row.GLFI_IB</VAR> & <VAR>row.GLFI_Def</VAR> & <VAR>row.Port_IB</VAR> & <VAR>row.Port_Def</VAR> \\
+\hline
+<BLOCK> endfor </BLOCK>
+\end{tabularx}
+\begin{center}
+\scriptsize \textbf{Table \thetableCounter: Distribution of counterparties by PCRU for each cohort} \\
+Source: RISQ/MRM from LRA data
+\end{center}
 
 \vspace{0.5cm}
 \noindent\textbf{B) Default analysis}
@@ -320,17 +418,22 @@ General Portfolio Information & <VAR>wp1_res_op</VAR> & <VAR>wp1_res_det</VAR> \
 
 <VAR>wp1_txt_app</VAR>
 
+\stepcounter{tableCounter}
 \vspace{0.3cm}
 \noindent\begin{tabularx}{\textwidth}{|X|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{3cm}|}
 \hline
 \rowcolor{sgred}
-\centering\textcolor{white}{\textbf{Reason}} & \textcolor{white}{\textbf{\# obligors}} & \textcolor{white}{\textbf{\% of obligors}} \\
+\centering\textcolor{white}{\textbf{Reason}} & \centering\textcolor{white}{\textbf{\# obligors}} & \centering\arraybackslash\textcolor{white}{\textbf{\% of obligors}} \\
 \hline
 <BLOCK> for row in wp1_t11 </BLOCK>
-<VAR>row.Reason</VAR> & <VAR>row.Obligors</VAR> & <VAR>row.Percent</VAR> \\
+<VAR>row.Reason</VAR> & \centering<VAR>row.Obligors</VAR> & \centering\arraybackslash<VAR>row.Percent</VAR> \\
 \hline
 <BLOCK> endfor </BLOCK>
 \end{tabularx}
+\begin{center}
+\scriptsize \textbf{Table \thetableCounter: Rationale of decrease in portfolio size} \\
+Source: RISQ/MRM from MADORI
+\end{center}
 <BLOCK> endif </BLOCK>
 
 <BLOCK> endif </BLOCK>
